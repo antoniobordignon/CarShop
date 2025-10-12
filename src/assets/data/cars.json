@@ -1,0 +1,112 @@
+[
+  {
+    "id": "1",
+    "image": "https://cdn.motor1.com/images/mgl/AkB8vL/s3/fiat-mobi-2023.webp",
+    "title": "Uno",
+    "year": "Novo - 2024",
+    "price": "R$ 120.000,00",
+    "color": "Vermelho",
+    "mileage": 0,
+    "description": "Compacto e econômico, ideal para o uso urbano com ótimo consumo de combustível."
+  },
+  {
+    "id": "2",
+    "image": "https://www.remaza.com.br/uploads/bc51be65-9c0a-415c-92bf-d41442c9bed7/fiat-strada-marcas-de-carros-remaza.png",
+    "title": "Toro",
+    "year": "Novo - 2024",
+    "price": "R$ 160.000,00",
+    "color": "Branco",
+    "mileage": 0,
+    "description": "Picape robusta e moderna, perfeita para o trabalho e para o lazer."
+  },
+  {
+    "id": "3",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "Novo - 2024",
+    "price": "R$ 120.000,00",
+    "color": "Prata",
+    "mileage": 0,
+    "description": "Design moderno e ótimo desempenho, um dos hatchbacks mais populares do Brasil."
+  },
+  {
+    "id": "4",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "2023",
+    "price": "R$ 110.000,00",
+    "color": "Preto",
+    "mileage": 12000,
+    "description": "Veículo seminovo, em excelente estado de conservação e com baixo consumo."
+  },
+  {
+    "id": "5",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "2022",
+    "price": "R$ 100.000,00",
+    "color": "Azul",
+    "mileage": 23000,
+    "description": "Hatch confiável, confortável e com ótimo custo-benefício."
+  },
+  {
+    "id": "6",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "2021",
+    "price": "R$ 95.000,00",
+    "color": "Cinza",
+    "mileage": 34000,
+    "description": "Modelo econômico e ideal para o dia a dia, com revisões em dia."
+  },
+  {
+    "id": "7",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "2020",
+    "price": "R$ 90.000,00",
+    "color": "Branco",
+    "mileage": 47000,
+    "description": "Carro usado em ótimo estado, interior bem conservado e mecânica revisada."
+  },
+  {
+    "id": "8",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "2019",
+    "price": "R$ 85.000,00",
+    "color": "Vermelho",
+    "mileage": 56000,
+    "description": "Excelente desempenho e conforto, com histórico completo de manutenção."
+  },
+  {
+    "id": "9",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "2018",
+    "price": "R$ 80.000,00",
+    "color": "Prata",
+    "mileage": 68000,
+    "description": "Econômico e confiável, ideal para quem busca custo-benefício."
+  },
+  {
+    "id": "10",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "2017",
+    "price": "R$ 75.000,00",
+    "color": "Preto",
+    "mileage": 81000,
+    "description": "Carro confortável, bem cuidado e com todas as revisões realizadas."
+  },
+  {
+    "id": "11",
+    "image": "https://www.remaza.com.br/uploads/2c7e0d97-1e25-49ed-b2fd-1eb219b86a45/hyundai-hb20-marcas-de-carros-remaza.png",
+    "title": "HB20",
+    "year": "2016",
+    "price": "R$ 70.000,00",
+    "color": "Branco",
+    "mileage": 95000,
+    "description": "Versão completa com bom histórico de manutenção e ótimo desempenho."
+  }
+]
