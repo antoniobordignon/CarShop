@@ -31,8 +31,6 @@ Antes de executar o projeto, verifique se você possui os seguintes requisitos:
 
  - npm install
 
- - npx rn-new --nativewind
-
  - npx expo start
 
 ---

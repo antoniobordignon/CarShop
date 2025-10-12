@@ -39,7 +39,7 @@ export default function LoginScreen() {
           value={senha}
           onChangeText={setSenha}
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push('/Screens/ForgotPassword/ForgotPasswordScreen')}>
           <Text className="text-blue-600 text-sm text-right mt-1">
             Esqueceu a senha?
           </Text>
@@ -54,7 +54,7 @@ export default function LoginScreen() {
       </TouchableOpacity>
       <View className="mt-6 flex-row justify-center">
         <Text className="text-gray-600">Não tem uma conta? </Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push('/Screens/register/registerScreen')}>
           <Text className="text-blue-600 font-medium">Cadastre-se</Text>
         </TouchableOpacity>
       </View>
