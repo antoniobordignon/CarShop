@@ -1,14 +1,26 @@
 import Button from "@/src/components/button";
 import Input from "@/src/components/input";
+import { useAuth } from "@/src/contexts/authContext";
 import { useRouter } from "expo-router";
-import { Lock, Mail } from "lucide-react-native";
+import { Lock, User } from "lucide-react-native";
 import React, { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 
 export default function LoginScreen() {
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [senha, setSenha] = useState("");
   const router = useRouter();
+  const { signIn,} = useAuth();
+
+  async function handleLogin() {
+    const success = await signIn(userName, senha);
+    console.log(success)
+    if (success) {
+      router.push("/Screens/home/homeScreen");
+    } else {
+      Alert.alert("Usuário ou senha inválidos.");
+    }
+  }
 
   return (
     <View className="flex-1 bg-white justify-center px-6">
@@ -20,41 +32,39 @@ export default function LoginScreen() {
           Faça login para continuar
         </Text>
       </View>
+
       <View className="mb-4">
         <Input
-          label="Email"
-          icon={<Mail size={20} color="#9CA3AF" />}
-          placeholder="seuemail@exemplo.com.br"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={setEmail}
+          label="Usuário"
+          icon={<User size={20} color="#9CA3AF" />}
+          placeholder="Seu usuário"
+          keyboardType="default"
+          value={userName}
+          onChangeText={setUserName}
         />
       </View>
+
       <View className="mb-4">
         <Input
           label="Senha"
           icon={<Lock size={20} color="#9CA3AF" />}
-          placeholder="sua senha"
+          placeholder="Sua senha"
           secureTextEntry
           value={senha}
           onChangeText={setSenha}
         />
-        <TouchableOpacity onPress={() => router.push('/Screens/ForgotPassword/ForgotPasswordScreen')}>
+        <TouchableOpacity onPress={() => router.push("/Screens/ForgotPassword/forgotPasswordScreen")}>
           <Text className="text-blue-600 text-sm text-right mt-1">
             Esqueceu a senha?
           </Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity className="bg-black rounded-md py-3 mt-3">
-        <Button
-          title="Entrar"
-          onPress={() => router.push("/Screens/home/homeScreen")}
-          
-        />
-      </TouchableOpacity>
+
+      <Button title="Entrar" onPress={handleLogin} />
+
       <View className="mt-6 flex-row justify-center">
         <Text className="text-gray-600">Não tem uma conta? </Text>
-        <TouchableOpacity onPress={() => router.push('/Screens/register/registerScreen')}>
+        <TouchableOpacity onPress={() => router.push("/Screens/register/registerScreen")}>
           <Text className="text-blue-600 font-medium">Cadastre-se</Text>
         </TouchableOpacity>
       </View>

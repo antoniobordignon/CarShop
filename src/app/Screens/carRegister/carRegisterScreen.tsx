@@ -15,7 +15,7 @@ export default function CarRegister() {
     <SafeAreaView className="flex-1 bg-white">
       <View className="bg-black py-4 px-4 flex-row items-center">
         <TouchableOpacity className="mr-3" onPress={() => router.back()}>
-          <Text className="text-white text-xl">←</Text>
+          <Text className="text-white text-xl">{"<"}</Text>
         </TouchableOpacity>
         <Text className="text-white font-bold text-lg">Cadastro de carros</Text>
       </View>
