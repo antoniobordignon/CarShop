@@ -1,6 +1,7 @@
 import Button from "@/src/components/button";
 import Input from "@/src/components/input";
 import { useAuth } from "@/src/contexts/authContext";
+import { syncCars } from "@/src/services/syncService";
 import { useRouter } from "expo-router";
 import { Lock, User } from "lucide-react-native";
 import React, { useState } from "react";
@@ -10,13 +11,19 @@ export default function LoginScreen() {
   const [userName, setUserName] = useState("");
   const [senha, setSenha] = useState("");
   const router = useRouter();
-  const { signIn,} = useAuth();
+  const { signIn } = useAuth();
 
   async function handleLogin() {
     const success = await signIn(userName, senha);
-    console.log(success)
+    console.log(success);
     if (success) {
-      router.push("/Screens/home/homeScreen");
+      try {
+        await syncCars();
+        router.push("/Screens/home/homeScreen");
+      } catch (error) {
+        console.log("Erro ao sincronizar carros:", error);
+        Alert.alert("Erro ao carregar dados dos carros.");
+      }
     } else {
       Alert.alert("Usuário ou senha inválidos.");
     }
@@ -53,7 +60,11 @@ export default function LoginScreen() {
           value={senha}
           onChangeText={setSenha}
         />
-        <TouchableOpacity onPress={() => router.push("/Screens/ForgotPassword/forgotPasswordScreen")}>
+        <TouchableOpacity
+          onPress={() =>
+            router.push("/Screens/ForgotPassword/ForgotPasswordScreen")
+          }
+        >
           <Text className="text-blue-600 text-sm text-right mt-1">
             Esqueceu a senha?
           </Text>
@@ -64,7 +75,9 @@ export default function LoginScreen() {
 
       <View className="mt-6 flex-row justify-center">
         <Text className="text-gray-600">Não tem uma conta? </Text>
-        <TouchableOpacity onPress={() => router.push("/Screens/register/registerScreen")}>
+        <TouchableOpacity
+          onPress={() => router.push("/Screens/register/registerScreen")}
+        >
           <Text className="text-blue-600 font-medium">Cadastre-se</Text>
         </TouchableOpacity>
       </View>
