@@ -1,6 +1,7 @@
 import NoImage from "@/src/assets/images/noimage.jpg";
 import Button from "@/src/components/button";
 import { getCarByIdFromLocalDB } from "@/src/repositories/carRepository";
+import { createOrder } from "@/src/services/carService";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
@@ -26,16 +27,37 @@ export default function CarDetails() {
     }
 
     loadCar();
-  }, []);
+  });
 
-  if (loading) return <Text>Carregando...</Text>;
+  async function handleSell() {
+    if (!car) return;
+
+    try {
+      await createOrder({
+        carId: car.id,
+        price: car.price,
+        vendorId: 1,
+        customerName: "Cliente Teste",
+      });
+
+      alert("Venda registrada com sucesso!");
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao registrar venda.");
+    }
+  }
+
+  if (loading)
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Carregando...</Text>
+      </View>
+    );
   if (!car) return <Text>Carro não encontrado</Text>;
 
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="flex-1 bg-white">
-
-        {/* Header */}
         <View className="flex-row justify-between items-center px-4 py-4 bg-black">
           <TouchableOpacity onPress={() => router.back()}>
             <Text className="text-white text-lg">{"<"}</Text>
@@ -46,18 +68,12 @@ export default function CarDetails() {
           </TouchableOpacity>
         </View>
 
-        {/* Imagem */}
         <Image
-          source={
-            car.images?.[0]?.url
-              ? { uri: car.images[0].url }
-              : NoImage
-          }
+          source={car.images?.[0]?.url ? { uri: car.images[0].url } : NoImage}
           className="w-full h-64 mt-4"
           resizeMode="contain"
         />
 
-        {/* Conteúdo */}
         <View className="px-4 mt-4">
           <Text className="text-lg font-bold">
             {car.brand} {car.model}
@@ -88,9 +104,8 @@ export default function CarDetails() {
             <Text className="mt-1 text-gray-700">{car.description}</Text>
           </View>
 
-          <Button title="vender" />
+          <Button title="vender" onPress={handleSell} />
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );
