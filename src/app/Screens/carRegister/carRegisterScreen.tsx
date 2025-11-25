@@ -1,16 +1,49 @@
 import Button from "@/src/components/button";
 import Input from "@/src/components/input";
+import { createCar } from "@/src/services/carService";
 import { useRouter } from "expo-router";
-import { ImagePlus } from "lucide-react-native";
 import React, { useState } from "react";
 import { ScrollView, Switch, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CarRegister() {
   const [isNew, setIsNew] = useState(false);
+
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
+  const [year, setYear] = useState("");
+  const [price, setPrice] = useState("");
+  const [color, setColor] = useState("");
+  const [km, setKm] = useState("");
+  const [description, setDescription] = useState("");
+
+  const [imageUrl, setImageUrl] = useState("");
   const [images, setImages] = useState<string[]>([]);
+
   const router = useRouter();
-  
+
+  async function handleSubmit() {
+  try {
+    const result = await createCar({
+      new: isNew,
+      brand,
+      model,
+      year: Number(year),
+      price: Number(price),
+      color,
+      km: Number(km),
+      description,
+      images: images.map((url) => ({ url })),
+    });
+
+    console.log("Carro criado:", result);
+    router.back();
+
+  } catch (error) {
+    console.log("Erro ao criar carro:", error);
+  }
+}
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="bg-black py-4 px-4 flex-row items-center">
@@ -28,37 +61,84 @@ export default function CarRegister() {
           <Text className="text-black font-medium mr-3">Novo</Text>
           <Switch value={isNew} onValueChange={setIsNew} />
         </View>
-        <Input label="Marca" placeholder="Ex: Fiat" />
-        <Input label="Modelo" placeholder="Ex: Pálio" />
+        <Input label="Marca" value={brand} onChangeText={setBrand} placeholder="Ex: Fiat" />
+        <Input label="Modelo" value={model} onChangeText={setModel} placeholder="Ex: Pálio" />
         <View className="flex-row justify-between">
           <View className="flex-1 mr-2">
-            <Input label="Ano" placeholder="Ex: 2023" keyboardType="numeric" />
+            <Input
+              label="Ano"
+              value={year}
+              onChangeText={setYear}
+              placeholder="Ex: 2023"
+              keyboardType="numeric"
+            />
           </View>
           <View className="flex-1 ml-2">
-            <Input label="Preço" placeholder="R$ 0,00" keyboardType="numeric" />
+            <Input
+              label="Preço"
+              value={price}
+              onChangeText={setPrice}
+              placeholder="R$ 0,00"
+              keyboardType="numeric"
+            />
           </View>
         </View>
         <View className="flex-row justify-between">
           <View className="flex-1 mr-2">
-            <Input label="Cor" placeholder="Ex: Vermelho" />
+            <Input
+              label="Cor"
+              value={color}
+              onChangeText={setColor}
+              placeholder="Ex: Vermelho"
+            />
           </View>
           <View className="flex-1 ml-2">
-            <Input label="Quilometragem" placeholder="Ex: 10.000" keyboardType="numeric" />
+            <Input
+              label="Quilometragem"
+              value={km}
+              onChangeText={setKm}
+              placeholder="Ex: 10.000"
+              keyboardType="numeric"
+            />
           </View>
         </View>
         <Input
           label="Descrição"
+          value={description}
+          onChangeText={setDescription}
           placeholder="Ex: Lorem ipsum..."
           multiline
           numberOfLines={4}
           style={{ textAlignVertical: "top" }}
         />
-        <Text className="text-black font-medium mb-2">Fotos</Text>
-        <TouchableOpacity className="border-2 border-dashed border-gray-300 rounded-lg h-40 justify-center items-center mb-6">
-          <ImagePlus size={40} color="#9CA3AF" />
-          <Text className="text-gray-500 mt-2">Adicione imagens</Text>
+        <Text className="text-black font-medium mt-4 mb-2">Fotos (URL)</Text>
+        <Input
+          label="URL da imagem"
+          placeholder="https://exemplo.com/imagem.jpg"
+          value={imageUrl}
+          onChangeText={setImageUrl}
+        />
+
+        <TouchableOpacity
+          className="bg-black rounded-lg py-3 px-4 mt-2 mb-4"
+          onPress={() => {
+            if (!imageUrl.trim()) return;
+            setImages((prev) => [...prev, imageUrl.trim()]);
+            setImageUrl("");
+          }}
+        >
+          <Text className="text-white text-center font-medium">Adicionar imagem</Text>
         </TouchableOpacity>
-        <Button title="Cadastrar" />
+        {images.length > 0 && (
+          <View className="mb-6">
+            {images.map((url, index) => (
+              <Text key={index} className="text-gray-700 mb-1">
+                • {url}
+              </Text>
+            ))}
+          </View>
+        )}
+        <Button title="Cadastrar" onPress={handleSubmit} />
       </ScrollView>
     </SafeAreaView>
   );

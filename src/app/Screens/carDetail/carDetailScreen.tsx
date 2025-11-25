@@ -13,6 +13,7 @@ export default function CarDetails() {
 
   const [car, setCar] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [selling, setSelling] = useState(false);
 
   useEffect(() => {
     async function loadCar() {
@@ -27,12 +28,13 @@ export default function CarDetails() {
     }
 
     loadCar();
-  });
+  }, []);
 
   async function handleSell() {
     if (!car) return;
 
     try {
+      setSelling(true);
       await createOrder({
         carId: car.id,
         price: car.price,
@@ -41,9 +43,12 @@ export default function CarDetails() {
       });
 
       alert("Venda registrada com sucesso!");
+      router.back();
     } catch (error) {
       console.error(error);
       alert("Erro ao registrar venda.");
+    } finally {
+      setSelling(false);
     }
   }
 
@@ -53,6 +58,7 @@ export default function CarDetails() {
         <Text>Carregando...</Text>
       </View>
     );
+
   if (!car) return <Text>Carro não encontrado</Text>;
 
   return (
@@ -104,7 +110,7 @@ export default function CarDetails() {
             <Text className="mt-1 text-gray-700">{car.description}</Text>
           </View>
 
-          <Button title="vender" onPress={handleSell} />
+          <Button title="vender" onPress={handleSell} loading={selling} />
         </View>
       </ScrollView>
     </SafeAreaView>

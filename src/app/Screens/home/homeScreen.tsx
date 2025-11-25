@@ -1,42 +1,38 @@
 import CarCard from "@/src/components/carCard";
-import { getCarsFromLocalDB } from "@/src/repositories/carRepository";
+import { getCarsFromLocalDB, saveCarsToLocalDB } from "@/src/repositories/carRepository";
+import { fetchAllCarsFromApi } from "@/src/services/carService";
+import type { Car as CarType } from "@/src/types/car";
+import { useFocusEffect } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import { Car, Plus, User } from "lucide-react-native";
-import React, { useEffect, useState } from "react";
-
-import {
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useCallback, useState } from "react";
+import { ActivityIndicator, FlatList, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-import type { Car as CarType } from "@/src/types/car";
 
 export default function HomeScreen() {
   const [cars, setCars] = useState<CarType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [search, setSearch] = useState("");
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        const data = await getCarsFromLocalDB();
-        setCars(data);
-      } catch (error) {
-        console.error("Erro ao carregar carros do banco local:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const loadCars = async () => {
+    try {
+      const apiCars = await fetchAllCarsFromApi();
+      await saveCarsToLocalDB(apiCars);
+      setCars(apiCars);
+    } catch {
+      const local = await getCarsFromLocalDB();
+      setCars(local);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchCars();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      loadCars();
+    }, [])
+  );
 
   const filteredCars = cars.filter((car) =>
     `${car.brand} ${car.model}`.toLowerCase().includes(search.toLowerCase())
@@ -53,15 +49,9 @@ export default function HomeScreen() {
         />
 
         <View className="flex-row mb-4">
-          <Text className="px-4 py-2 mr-2 rounded-full bg-black text-white">
-            Todos
-          </Text>
-          <Text className="px-4 py-2 mr-2 rounded-full border border-gray-300">
-            Novos
-          </Text>
-          <Text className="px-4 py-2 rounded-full border border-gray-300">
-            Usados
-          </Text>
+          <Text className="px-4 py-2 mr-2 rounded-full bg-black text-white">Todos</Text>
+          <Text className="px-4 py-2 mr-2 rounded-full border border-gray-300">Novos</Text>
+          <Text className="px-4 py-2 rounded-full border border-gray-300">Usados</Text>
         </View>
 
         {loading ? (
@@ -74,12 +64,11 @@ export default function HomeScreen() {
             renderItem={({ item }) => (
               <CarCard
                 {...item}
-                selected={item.id === selectedId}
                 brand={item.brand}
                 model={item.model}
                 year={item.year.toString()}
                 price={item.price.toString()}
-                image={ item.images?.[0]?.url ?? ""}
+                image={item.images?.[0]?.url ?? ""}
                 onPress={() =>
                   router.push({
                     pathname: "/Screens/carDetail/carDetailScreen",
@@ -91,6 +80,7 @@ export default function HomeScreen() {
           />
         )}
       </View>
+
       <View className="flex-row justify-around items-center bg-black py-3">
         <TouchableOpacity className="items-center">
           <View className="bg-white/10 rounded-full p-3 mb-1">

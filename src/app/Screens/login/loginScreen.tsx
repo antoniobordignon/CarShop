@@ -10,22 +10,30 @@ import { Alert, Text, TouchableOpacity, View } from "react-native";
 export default function LoginScreen() {
   const [userName, setUserName] = useState("");
   const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { signIn } = useAuth();
 
   async function handleLogin() {
-    const success = await signIn(userName, senha);
-    console.log(success);
-    if (success) {
-      try {
-        await syncCars();
-        router.push("/Screens/home/homeScreen");
-      } catch (error) {
-        console.log("Erro ao sincronizar carros:", error);
-        Alert.alert("Erro ao carregar dados dos carros.");
+    try {
+      setLoading(true);
+
+      const success = await signIn(userName, senha);
+      console.log(success);
+
+      if (success) {
+        try {
+          await syncCars();
+          router.push("/Screens/home/homeScreen");
+        } catch (error) {
+          console.log("Erro ao sincronizar carros:", error);
+          Alert.alert("Erro ao carregar dados dos carros.");
+        }
+      } else {
+        Alert.alert("Usuário ou senha inválidos.");
       }
-    } else {
-      Alert.alert("Usuário ou senha inválidos.");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -60,18 +68,9 @@ export default function LoginScreen() {
           value={senha}
           onChangeText={setSenha}
         />
-        <TouchableOpacity
-          onPress={() =>
-            router.push("/Screens/ForgotPassword/ForgotPasswordScreen")
-          }
-        >
-          <Text className="text-blue-600 text-sm text-right mt-1">
-            Esqueceu a senha?
-          </Text>
-        </TouchableOpacity>
       </View>
 
-      <Button title="Entrar" onPress={handleLogin} />
+      <Button title="Entrar" onPress={handleLogin} loading={loading}/>
 
       <View className="mt-6 flex-row justify-center">
         <Text className="text-gray-600">Não tem uma conta? </Text>
