@@ -5,7 +5,7 @@ import { syncCars } from "@/src/services/syncService";
 import { useRouter } from "expo-router";
 import { Lock, User } from "lucide-react-native";
 import React, { useState } from "react";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 
 export default function LoginScreen() {
   const [userName, setUserName] = useState("");
@@ -71,15 +71,6 @@ export default function LoginScreen() {
       </View>
 
       <Button title="Entrar" onPress={handleLogin} loading={loading}/>
-
-      <View className="mt-6 flex-row justify-center">
-        <Text className="text-gray-600">Não tem uma conta? </Text>
-        <TouchableOpacity
-          onPress={() => router.push("/Screens/register/registerScreen")}
-        >
-          <Text className="text-blue-600 font-medium">Cadastre-se</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }

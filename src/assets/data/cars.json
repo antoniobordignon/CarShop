@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "new": true,
+    "brand": "Fiat",
+    "model": "Uno",
+    "year": 2024,
+    "price": 120000.00,
+    "color": "Vermelho",
+    "km": 0,
+    "description": "Compacto e econômico, ideal para o uso urbano com ótimo consumo de combustível."
+  },
+  {
+    "id": 2,
+    "new": true,
+    "brand": "Fiat",
+    "model": "Toro",
+    "year": 2024,
+    "price": 160000.00,
+    "color": "Branco",
+    "km": 0,
+    "description": "Picape robusta e moderna, perfeita para o trabalho e para o lazer."
+  },
+  {
+    "id": 3,
+    "new": true,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2024,
+    "price": 120000.00,
+    "color": "Prata",
+    "km": 0,
+    "description": "Design moderno e ótimo desempenho, um dos hatchbacks mais populares do Brasil."
+  },
+  {
+    "id": 4,
+    "new": false,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2023,
+    "price": 110000.00,
+    "color": "Preto",
+    "km": 12000,
+    "description": "Veículo seminovo, em excelente estado de conservação e com baixo consumo."
+  },
+  {
+    "id": 5,
+    "new": false,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2022,
+    "price": 100000.00,
+    "color": "Azul",
+    "km": 23000,
+    "description": "Hatch confiável, confortável e com ótimo custo-benefício."
+  },
+  {
+    "id": 6,
+    "new": false,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2021,
+    "price": 95000.00,
+    "color": "Cinza",
+    "km": 34000,
+    "description": "Modelo econômico e ideal para o dia a dia, com revisões em dia."
+  },
+  {
+    "id": 7,
+    "new": false,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2020,
+    "price": 90000.00,
+    "color": "Branco",
+    "km": 47000,
+    "description": "Carro usado em ótimo estado, interior bem conservado e mecânica revisada."
+  },
+  {
+    "id": 8,
+    "new": false,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2019,
+    "price": 85000.00,
+    "color": "Vermelho",
+    "km": 56000,
+    "description": "Excelente desempenho e conforto, com histórico completo de manutenção."
+  },
+  {
+    "id": 9,
+    "new": false,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2018,
+    "price": 80000.00,
+    "color": "Prata",
+    "km": 68000,
+    "description": "Econômico e confiável, ideal para quem busca custo-benefício."
+  },
+  {
+    "id": 10,
+    "new": false,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2017,
+    "price": 75000.00,
+    "color": "Preto",
+    "km": 81000,
+    "description": "Carro confortável, bem cuidado e com todas as revisões realizadas."
+  },
+  {
+    "id": 11,
+    "new": false,
+    "brand": "Hyundai",
+    "model": "HB20",
+    "year": 2016,
+    "price": 70000.00,
+    "color": "Branco",
+    "km": 95000,
+    "description": "Versão completa com bom histórico de manutenção e ótimo desempenho."
+  }
+]
